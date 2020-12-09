@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+.paddingT25{
+    padding-top: 25px;
+}
+.padding10{
+    padding: 10px;
+}
+.padding25{
+    padding: 25px;
+}
+.paddingLR20{
+    padding: 0 20px;
+}
+.font14{
+    font-size: 14px;
+}
+.text-white{
+    color: white;
+}
+body{
+    background-color: #afcdef;
+}

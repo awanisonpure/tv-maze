@@ -1,0 +1,100 @@
+<!-- spinner -->
+<div *ngIf="!loadData">
+ <div class="text-center">
+   <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+   </div>
+ </div>
+</div>
+<div> 
+  <section *ngIf='loadData' class="paddingT25 ">  
+      <div *ngIf='!isSearched' class="paddingLR20">
+        <div class="mb-1">
+          <div *ngIf='selectedGenreList.length==0'>
+            <div class="d-flex justify-content-center mt-3">
+              <b>No Data Found.</b>
+            </div>
+          </div>
+          <div *ngIf='selectedGenreList.length>0'>
+            <div *ngFor='let genreInfo of selectedGenreList'>
+              <h4 class="custom-headers" [ngClass]="{'top-100':genreInfo.genreVal === 'Popular Shows'}">
+                <span class="popular">{{genreInfo.genreVal}}</span>
+              </h4>
+              <carousel [cellsToScroll] = '2'>
+                <div *ngFor="let slide of genreInfo.genreData" [id]="slide.id">
+                  <div class="carousel-cell card hand zoom">
+                   <div class="card-img-top">
+                    <div *ngIf='slide.image!=null || slide.image !=undefined'>
+                      <img class="" [src]="slide.image.medium" [alt]="" [title]="slide.name"
+                        [routerLink]="['/shows', slide.id]" searchChar=''>
+                    </div>
+                    <div *ngIf='slide.image==null || slide.image ==undefined'>
+                      <div class="no-genre-image" [routerLink]="['/shows', slide.show.id]">Image
+                        Unavailable</div>
+                    </div>
+                   </div>
+                    <div class="card-body padding10">
+                      <div *ngIf='slide.rating.average ==null'>
+                        <span class="" aria-hidden="true"></span>
+                        <span class="pl-1">N/A</span>
+                      </div>
+                      <div *ngIf='slide.rating.average!= null' class="font14">
+                        <span class="" aria-hidden="true"></span>
+                        <span class="pl-1">{{slide.rating.average}}</span> <span>/10</span>
+                      </div>
+                      <a target='_blank' href="{{slide.url}}">
+                        <span class="ellipsed" title="{{slide.name}}">{{slide.name}}</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </carousel>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div *ngIf='isSearched' class="paddingLR20">
+        <div class="mb-1">
+          <h4 class="custom-headers">
+            <span class="popular">Search Results</span>
+          </h4>
+          <div *ngIf='searchCharShows.length==0'>
+            <div class="d-flex justify-content-center mt-3">
+              <b>No Results Found For: '{{searchChar}}'.</b>
+            </div>
+          </div>
+          <div *ngIf='searchCharShows.length>0'>
+            <carousel>
+              <div *ngFor="let slide of searchCharShows" [id]="slide.show.id">
+                <div class="carousel-cell card hand zoom">
+                  <div class="card-img-top">
+                  <div *ngIf='slide.show.image!=null || slide.show.image !=undefined'>
+                    <img class="" [src]="slide.show.image.medium" [alt]="" [title]="slide.show.name"
+                      [routerLink]="['/shows', slide.show.id]">
+                  </div>
+                  <div *ngIf='slide.show.image==null || slide.show.image ==undefined'>
+                    <div class="no-genre-image-search" [routerLink]="['/shows', slide.show.id]">Image Unavailable</div>
+                  </div>
+                  </div>
+                  <div class="card-body padding10">
+                    <div *ngIf='slide.show.rating.average !=null' class="font14">
+                      <span class="" aria-hidden="true"></span>
+                      <span class="pl-1">{{slide.show.rating.average}}</span><span>/10</span>
+                    </div>
+                    <div *ngIf='slide.show.rating.average == null' class="font14">
+                      <span class="" aria-hidden="true"></span>
+                      <span class="pl-1">N/A</span>
+                    </div>
+                    <a target='_blank' href="{{slide.show.url}}">
+                      <span class="" title="{{slide.show.name}}">{{slide.show.name}}</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </carousel>
+          </div>
+        </div>
+      </div> 
+  </section>
+</div>
