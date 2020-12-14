@@ -7,20 +7,14 @@ import { ShowsService } from '../shared/shows.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
 
   constructor(private showsService: ShowsService, private router: Router) { }
 
-  title = 'TV Maze';
+  title = 'TVMaze';
   searchChar = '';
-  showScrollTopBtn: boolean;
-  topPositionToShowScrollBtn = 100;
-  scrollPosition;
+  inputField: string;
 
-  ngOnInit(): void {
-  }
-
-  // show/hide toggler based on device width
   openCloseDiv(): void {
     const collapsibleDiv = document.getElementById('navbarTogglerId');
     if (collapsibleDiv.classList.contains('collapse')) {
@@ -30,23 +24,24 @@ export class NavbarComponent implements OnInit {
       collapsibleDiv.classList.add('collapse');
       collapsibleDiv.classList.remove('collapsed');
     }
-  }
+  } 
 
   // fetch searched value from input box
   valueSearched(event: { target: { value: string; }; keyCode: number; }): void {
     this.searchChar = event.target.value;
-    if (event.keyCode === 13) { this.search(); }
+    if (event.keyCode === 13) { 
+      this.search(); 
+    }   
   }
 
   // set the searched key value to be fetched in dashboard page
   search(): void {
-    const pathName = window.location.pathname;
-    if (pathName === '/') {
-      this.showsService.setSearchVal(this.searchChar);
-    } else {
-      this.router.navigate(['']);
-      setTimeout(() => this.showsService.setSearchVal(this.searchChar), 100);
-    }
+    return this.showsService.setSearchVal(this.searchChar);
+  }
+
+  // clearing input field
+  clearSearch(){
+    this.searchChar = '';
   }
 
 }

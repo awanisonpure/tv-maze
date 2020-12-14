@@ -22,6 +22,7 @@ export class ShowsComponent implements OnInit {
   size = 24;
 
   ngOnInit(): void {
+    this.searchChar = '';
     this.getSearchVal();
     this.showTvShowsList();
   }
@@ -43,7 +44,6 @@ export class ShowsComponent implements OnInit {
     this.uniqueGenreList = ['Popular Shows'].concat(this.allGenreList.filter( function( item, index, inputArray ) {
       return inputArray.indexOf(item) === index;
     }));
-    // console.log("list : "+this.uniqueGenreList);
     this.genreBasedShows();
   }
 
@@ -79,19 +79,8 @@ export class ShowsComponent implements OnInit {
   getSearchVal(): any{
     this.showsService.getSearchVal().subscribe(value => {
       this.searchChar = value;
-      this.triggerSearch();
-    });
-  }
-
-  // identifies if search api needs to be called or not
-  triggerSearch(): void {
-    this.loadData = false;
-    if (this.searchChar.trim() === null || this.searchChar.trim() === '' || this.searchChar === undefined) {
-      this.isSearched = false;
-      setTimeout(() => this.loadData = true, 500);
-    } else {
       this.searchResults();
-    }
+    });
   }
 
   // get search results based on search value

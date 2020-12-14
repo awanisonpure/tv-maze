@@ -9,91 +9,81 @@
 <div> 
   <section *ngIf='loadData' class="paddingT25 ">  
       <div *ngIf='!isSearched' class="paddingLR20">
-        <div class="mb-1">
-          <div *ngIf='selectedGenreList.length==0'>
-            <div class="d-flex justify-content-center mt-3">
-              <b>No Data Found.</b>
-            </div>
-          </div>
-          <div *ngIf='selectedGenreList.length>0'>
+        <div class="mb-1">       
+          <div *ngIf='selectedGenreList.length>0; else notFound'>
             <div *ngFor='let genreInfo of selectedGenreList'>
-              <h4 class="custom-headers" [ngClass]="{'top-100':genreInfo.genreVal === 'Popular Shows'}">
-                <span class="popular">{{genreInfo.genreVal}}</span>
+              <h4 [ngClass]="{'top-100':genreInfo.genreVal === 'Popular Shows'}">
+                <span>{{genreInfo.genreVal}}</span>
               </h4>
               <carousel [cellsToScroll] = '2'>
                 <div *ngFor="let slide of genreInfo.genreData" [id]="slide.id">
                   <div class="carousel-cell card hand zoom">
                    <div class="card-img-top">
-                    <div *ngIf='slide.image!=null || slide.image !=undefined'>
+                    <div *ngIf='slide.image!=null; else imageUnavailable'>
                       <img class="" [src]="slide.image.medium" [alt]="" [title]="slide.name"
                         [routerLink]="['/shows', slide.id]" searchChar=''>
                     </div>
-                    <div *ngIf='slide.image==null || slide.image ==undefined'>
-                      <div class="no-genre-image" [routerLink]="['/shows', slide.show.id]">Image
-                        Unavailable</div>
-                    </div>
+                    <ng-template #imageUnavailable>
+                      <div class="no-genre-image" [routerLink]="['/shows', slide.show.id]">Image Unavailable</div>
+                    </ng-template>
                    </div>
-                    <div class="card-body padding10">
-                      <div *ngIf='slide.rating.average ==null'>
-                        <span class="" aria-hidden="true"></span>
-                        <span class="pl-1">N/A</span>
+                    <div class="card-body padding10 font14">
+                      <div *ngIf='slide.rating.average!= null; else ratingUnavailable'>
+                        <label>Rating: </label><span class="pl-1">{{slide.rating.average}}</span> <span>/10</span>
                       </div>
-                      <div *ngIf='slide.rating.average!= null' class="font14">
-                        <span class="" aria-hidden="true"></span>
-                        <span class="pl-1">{{slide.rating.average}}</span> <span>/10</span>
-                      </div>
-                      <a target='_blank' href="{{slide.url}}">
-                        <span class="ellipsed" title="{{slide.name}}">{{slide.name}}</span>
-                      </a>
+                      <ng-template #ratingUnavailable>
+                        <label>Rating: </label><span class="pl-1">N/A</span>
+                      </ng-template>
+                      <div><span>{{slide.name}}</span></div>
                     </div>
                   </div>
                 </div>
               </carousel>
             </div>
           </div>
+          <ng-template #notFound >
+            <div class="justify-content-center mt-3">
+              <b>No Data Found.</b>
+            </div>
+          </ng-template>
         </div>
-      </div>
-  
+      </div> 
       <div *ngIf='isSearched' class="paddingLR20">
         <div class="mb-1">
           <h4 class="custom-headers">
             <span class="popular">Search Results</span>
-          </h4>
-          <div *ngIf='searchCharShows.length==0'>
-            <div class="d-flex justify-content-center mt-3">
-              <b>No Results Found For: '{{searchChar}}'.</b>
-            </div>
-          </div>
-          <div *ngIf='searchCharShows.length>0'>
+          </h4>         
+          <div *ngIf='searchCharShows.length>0; else noResultFound'>
             <carousel>
               <div *ngFor="let slide of searchCharShows" [id]="slide.show.id">
                 <div class="carousel-cell card hand zoom">
                   <div class="card-img-top">
-                  <div *ngIf='slide.show.image!=null || slide.show.image !=undefined'>
+                  <div *ngIf='slide.show.image!=null; else searchImageUnavailable'>
                     <img class="" [src]="slide.show.image.medium" [alt]="" [title]="slide.show.name"
                       [routerLink]="['/shows', slide.show.id]">
                   </div>
-                  <div *ngIf='slide.show.image==null || slide.show.image ==undefined'>
+                  <ng-template #searchImageUnavailable>
                     <div class="no-genre-image-search" [routerLink]="['/shows', slide.show.id]">Image Unavailable</div>
+                  </ng-template>
                   </div>
-                  </div>
-                  <div class="card-body padding10">
-                    <div *ngIf='slide.show.rating.average !=null' class="font14">
-                      <span class="" aria-hidden="true"></span>
+                  <div class="card-body padding10 font14">
+                    <div *ngIf='slide.show.rating.average!=null; else searchRatingUnavailable'>
                       <span class="pl-1">{{slide.show.rating.average}}</span><span>/10</span>
                     </div>
-                    <div *ngIf='slide.show.rating.average == null' class="font14">
-                      <span class="" aria-hidden="true"></span>
+                    <ng-template #searchRatingUnavailable>
                       <span class="pl-1">N/A</span>
-                    </div>
-                    <a target='_blank' href="{{slide.show.url}}">
-                      <span class="" title="{{slide.show.name}}">{{slide.show.name}}</span>
-                    </a>
+                    </ng-template>
+                    <div><span>{{slide.show.name}}</span></div>
                   </div>
                 </div>
               </div>
             </carousel>
           </div>
+          <ng-template #noResultFound>
+            <div class="justify-content-center mt-3">
+              <b>No Results Found For: '{{searchChar}}'.</b>
+            </div>
+          </ng-template>
         </div>
       </div> 
   </section>

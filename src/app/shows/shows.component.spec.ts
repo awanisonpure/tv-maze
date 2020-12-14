@@ -91,7 +91,6 @@ describe('ShowsComponent', () => {
 
   it('should call searchResults and return list of searchShows', fakeAsync(() => {
     component.searchChar = 'Break';
-    component.triggerSearch();
     const searchResults = [
       {
         score: 17.854973,
@@ -165,14 +164,6 @@ describe('ShowsComponent', () => {
     const sortedOutput = [{ rating: { average: 9 } }, { rating: { average: 8 } }, { rating: { average: 5 } }, { rating: { average: 2 } }];
     expect(data).toEqual(sortedOutput);
   });
-
-  it('should get load page without any search results', fakeAsync(() => {
-    component.searchChar = '';
-    component.triggerSearch();
-    tick(500);
-    expect(component.isSearched).toEqual(false);
-    expect(component.loadData).toBe(true);
-  }));
 
 });
 

@@ -1,4 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+.margin-auto{
+    margin: auto;
+}
 .paddingT25{
     padding-top: 25px;
 }
@@ -17,6 +20,18 @@
 .text-white{
     color: white;
 }
+.width100{
+    width: 100%;
+}
 body{
-    background-color: #afcdef;
+    background-color: #ddc37d;
+}
+.ellipsed {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
+}
+.spinner-border{
+    color: #dfa81a;
 }

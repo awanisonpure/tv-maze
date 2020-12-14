@@ -68,45 +68,6 @@ describe('ShowDetailsComponent', () => {
     expect(component.showDetails).toEqual(response);
   }));
 
-  it('should call loadSeasons and return list of seasonsDetails', fakeAsync(() => {
-    component.selectedShowId = 10;
-    const response: object =
-      [
-        {
-          id: 800,
-          url: 'http://www.tvmaze.com/seasons/800/firefly-season-1',
-          number: 1,
-          name: '',
-          episodeOrder: 14,
-          premiereDate: '2002-09-20',
-          endDate: '2002-12-20',
-          network: {
-            id: 4,
-            name: 'FOX',
-            country: {
-              name: 'United States',
-              code: 'US',
-              timezone: 'America/New_York'
-            }
-          },
-          webChannel: null,
-          image: {
-            medium: 'http://static.tvmaze.com/uploads/images/medium_portrait/9/23969.jpg',
-            original: 'http://static.tvmaze.com/uploads/images/original_untouched/9/23969.jpg'
-          },
-          summary: `<p>Captain Malcolm 'Mal' Reynolds is a former galactic`,
-          _links: {
-            self: {
-              href: 'http://api.tvmaze.com/seasons/800'
-            }
-          }
-        }
-      ];
-    spyOn(showDetailsService, 'getSpecificShowsInfo').withArgs(component.selectedShowId).and.returnValue(of(response));
-    component.loadSeasons();
-    expect(component.seasonsDetails).toEqual(response);
-  }));
-
   it('should set summary value for summary key not found in response', () => {
     component.showDetails = { id: 800 };
     component.removeSemanticTagsFromSummary();

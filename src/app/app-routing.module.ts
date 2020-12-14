@@ -6,6 +6,7 @@ import { ShowDetailsComponent } from './show-details/show-details.component';
 
 const routes: Routes = [
   { path: '', component: ShowsComponent },
+  { path: 'shows', component: ShowsComponent },
   { path: 'shows/:id', component: ShowDetailsComponent },
   { path: 'page-not-found', component: PageNotFoundComponent },
   { path: '**', redirectTo: '/page-not-found' }

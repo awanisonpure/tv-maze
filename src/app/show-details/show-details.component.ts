@@ -13,8 +13,8 @@ export class ShowDetailsComponent implements OnInit {
   selectedShowId: number;
   showDetails: any;
   loader = true;
-  castDetails;
-  seasonsDetails;
+  castDetails: any;
+  seasonsDetails: any;
 
   ngOnInit(): void {
     this.loader = true;
