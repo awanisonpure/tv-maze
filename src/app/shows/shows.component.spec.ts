@@ -1,5 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed} from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
 import { of } from 'rxjs';
 import { ShowsComponent } from './shows.component';
@@ -160,9 +160,21 @@ describe('ShowsComponent', () => {
 
   it('should sort average rating in descending order', () => {
     const data = [{ rating: { average: 2 } }, { rating: { average: 9 } }, { rating: { average: 5 } }, { rating: { average: 8 } }];
-    component.reverseRating(data);
+    component.sortByRating(data);
     const sortedOutput = [{ rating: { average: 9 } }, { rating: { average: 8 } }, { rating: { average: 5 } }, { rating: { average: 2 } }];
     expect(data).toEqual(sortedOutput);
+  });
+
+  it('should set searched TV Show Value', () => {
+    const event = { target: { value: 'Thrones' }, keyCode: 34 };
+    fixture.componentInstance.valueSearched(event);
+    expect(fixture.componentInstance.searchChar).toEqual('Thrones');
+  });
+
+  it('should set searched TV Show Value', () => {
+    const event = { target: { value: 'Thrones' }, keyCode: 13 };
+    fixture.componentInstance.valueSearched(event);
+    expect(fixture.componentInstance.searchChar).toEqual('Thrones');
   });
 
 });

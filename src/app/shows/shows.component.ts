@@ -31,12 +31,12 @@ export class ShowsComponent implements OnInit {
   showTvShowsList(): void {
     this.showsService.getAllShowsList().subscribe(data => {
       this.allShowsList = data;
-      this.getGenreList();
+      this.setGenreList();
     });
   }
 
   // create list of all genres available in allShowsList
-  getGenreList(): void {
+  setGenreList(): void {
     this.allShowsList.forEach((element: { genres: any; }) => {
       this.allGenreList = this.allGenreList.concat(element.genres);
     });
@@ -56,10 +56,10 @@ export class ShowsComponent implements OnInit {
       };
       if (genre !== 'Popular Shows') {
         genreBasedShows.genreData = this.allShowsList.filter((data: { genres: any[]; }) => data.genres.includes(genre));
-        genreBasedShows.genreData = this.reverseRating(genreBasedShows.genreData);
+        genreBasedShows.genreData = this.sortByRating(genreBasedShows.genreData);
       } else {
         genreBasedShows.genreData = this.allShowsList;
-        genreBasedShows.genreData = this.reverseRating(genreBasedShows.genreData);
+        genreBasedShows.genreData = this.sortByRating(genreBasedShows.genreData);
         genreBasedShows.genreData = genreBasedShows.genreData.slice(0, this.size);
       }
       this.selectedGenreList.push(genreBasedShows);
@@ -68,10 +68,9 @@ export class ShowsComponent implements OnInit {
   }
 
   // sort genre data based on average rating in descending order
-  reverseRating(data: any[]): any {
+  sortByRating(data: any[]): any {
     data.sort((value1: { rating: { average: number; }; }, value2: { rating: { average: number; }; }) => 
-         (value1.rating.average > value2.rating.average) ? 1 : -1);
-    data = data.reverse();
+         (value1.rating.average > value2.rating.average) ? -1 : 1);
     return data;
   }
   
@@ -91,4 +90,23 @@ export class ShowsComponent implements OnInit {
       this.loadData = true;
     });
   }
+
+   // fetch searched value from input box
+   valueSearched(event: { target: { value: string; }; keyCode: number; }): void {
+    this.searchChar = event.target.value;
+    if (event.keyCode === 13) { 
+      this.search(); 
+    }   
+  }
+
+  // set the searched key value to be fetched in dashboard page
+  search(): void {
+    return this.showsService.setSearchVal(this.searchChar);
+  }
+
+  // clearing input field
+  clearSearch(){
+    this.searchChar = '';
+  }
+
 }

@@ -15,4 +15,10 @@
     height: 278px;
     padding-top: 50%;
 }
+.search-field{
+    margin: 20px auto;
+}
+.border-color{
+    border-color: #3c587d;
+}
 

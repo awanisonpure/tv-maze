@@ -1,0 +1,9 @@
+.img-photos{
+    height: 100%; 
+    width:100%;
+}
+.no-cast-image{
+    height: 127px;
+    text-align: center;
+    margin-top: 50%;
+}

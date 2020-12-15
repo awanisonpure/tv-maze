@@ -16,19 +16,12 @@ describe('ShowDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ShowDetailsComponent ]
-    })
-    .compileComponents();
-  });
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
       declarations: [ShowDetailsComponent],
       imports: [HttpClientTestingModule],
       providers: [
         { provide: ActivatedRoute, useValue: mockActivatedRoute },
         ShowDetailsService],
-    })
+    }).compileComponents();
     fixture = TestBed.createComponent(ShowDetailsComponent);
     component = fixture.componentInstance;
     showDetailsService = TestBed.inject(ShowDetailsService);

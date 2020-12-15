@@ -1,24 +1,44 @@
-<!-- spinner -->
+<!-- Spinner Start -->
 <div *ngIf="!loadData">
- <div class="text-center">
-   <div class="spinner-border" role="status">
-    <span class="sr-only">Loading...</span>
-   </div>
- </div>
+  <div class="text-center">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
 </div>
-<div> 
-  <section *ngIf='loadData' class="paddingT25 ">  
-      <div *ngIf='!isSearched' class="paddingLR20">
-        <div class="mb-1">       
-          <div *ngIf='selectedGenreList.length>0; else notFound'>
-            <div *ngFor='let genreInfo of selectedGenreList'>
-              <h4 [ngClass]="{'top-100':genreInfo.genreVal === 'Popular Shows'}">
-                <span>{{genreInfo.genreVal}}</span>
-              </h4>
-              <carousel [cellsToScroll] = '2'>
-                <div *ngFor="let slide of genreInfo.genreData" [id]="slide.id">
-                  <div class="carousel-cell card hand zoom">
-                   <div class="card-img-top">
+<!-- Spinner End -->
+<!--Back Link Start-->
+<div *ngIf='isSearched'>
+  <div class="dark-text font12">
+    <a routerLink="/shows"><span>&#8592;</span>Back</a>
+  </div>
+</div>
+<!--Back Link End-->
+<div>
+  <section *ngIf='loadData' class="paddingT25 ">
+    <div *ngIf='!isSearched' class="paddingLR20">
+      <!--Search Field Start-->
+      <div class="input-group col-sm-4 search-field">
+        <input class="form-control border-color" type="search" autocomplete="off" placeholder="Search Shows"
+          [(ngModel)]='searchChar' (keyup)='valueSearched($event)' id="search">
+        <span class="input-group-append">
+          <button class="dark-bg btn" type="button" (click)='search()'>
+            Search
+          </button>
+        </span>
+      </div>
+      <!--Search Field End-->
+      <!--All Shows Start-->
+      <div class="mb-1">
+        <div *ngIf='selectedGenreList.length>0; else notFound'>
+          <div *ngFor='let genreInfo of selectedGenreList'>
+            <h4 [ngClass]="{'top-100':genreInfo.genreVal === 'Popular Shows'}">
+              <span>{{genreInfo.genreVal}}</span>
+            </h4>
+            <carousel [cellsToScroll]='2'>
+              <div *ngFor="let slide of genreInfo.genreData" [id]="slide.id">
+                <div class="carousel-cell card card-bg hand" style="width: 180px;">
+                  <div class="card-img-top">
                     <div *ngIf='slide.image!=null; else imageUnavailable'>
                       <img class="" [src]="slide.image.medium" [alt]="" [title]="slide.name"
                         [routerLink]="['/shows', slide.id]" searchChar=''>
@@ -26,38 +46,40 @@
                     <ng-template #imageUnavailable>
                       <div class="no-genre-image" [routerLink]="['/shows', slide.show.id]">Image Unavailable</div>
                     </ng-template>
-                   </div>
-                    <div class="card-body padding10 font14">
-                      <div *ngIf='slide.rating.average!= null; else ratingUnavailable'>
-                        <label>Rating: </label><span class="pl-1">{{slide.rating.average}}</span> <span>/10</span>
-                      </div>
-                      <ng-template #ratingUnavailable>
-                        <label>Rating: </label><span class="pl-1">N/A</span>
-                      </ng-template>
-                      <div><span>{{slide.name}}</span></div>
+                  </div>
+                  <div class="card-body padding-card font12">
+                    <div class="fontB"><span>{{slide.name}}</span></div>
+                    <div *ngIf='slide.rating.average!= null; else ratingUnavailable'>
+                      <label>Rating: </label><span class="pl-1">{{slide.rating.average}}</span> <span>/10</span>
                     </div>
+                    <ng-template #ratingUnavailable>
+                      <label>Rating: </label><span class="pl-1">N/A</span>
+                    </ng-template>
                   </div>
                 </div>
-              </carousel>
-            </div>
+              </div>
+            </carousel>
           </div>
-          <ng-template #notFound >
-            <div class="justify-content-center mt-3">
-              <b>No Data Found.</b>
-            </div>
-          </ng-template>
         </div>
-      </div> 
-      <div *ngIf='isSearched' class="paddingLR20">
-        <div class="mb-1">
-          <h4 class="custom-headers">
-            <span class="popular">Search Results</span>
-          </h4>         
-          <div *ngIf='searchCharShows.length>0; else noResultFound'>
-            <carousel>
-              <div *ngFor="let slide of searchCharShows" [id]="slide.show.id">
-                <div class="carousel-cell card hand zoom">
-                  <div class="card-img-top">
+        <ng-template #notFound>
+          <div class="justify-content-center mt-3">
+            <b>No Data Found.</b>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
+    <!--Search Results Start-->
+    <div *ngIf='isSearched' class="paddingLR20">
+      <div class="mb-1">
+        <h4 class="custom-headers">
+          <span class="popular">Search Results</span>
+        </h4>
+        <div *ngIf='searchCharShows.length>0; else noResultFound'>
+          <carousel>
+            <div *ngFor="let slide of searchCharShows" [id]="slide.show.id">
+              <div class="carousel-cell card hand">
+                <div class="card-img-top">
                   <div *ngIf='slide.show.image!=null; else searchImageUnavailable'>
                     <img class="" [src]="slide.show.image.medium" [alt]="" [title]="slide.show.name"
                       [routerLink]="['/shows', slide.show.id]">
@@ -65,26 +87,29 @@
                   <ng-template #searchImageUnavailable>
                     <div class="no-genre-image-search" [routerLink]="['/shows', slide.show.id]">Image Unavailable</div>
                   </ng-template>
+                </div>
+                <div class="card-body padding-card font12 fontB">
+                  <div><span class="ellipsed">{{slide.show.name}}</span></div>
+                  <div *ngIf='slide.show.rating.average!=null; else searchRatingUnavailable'>
+                    <span class="pl-1">{{slide.show.rating.average}}</span><span>/10</span>
                   </div>
-                  <div class="card-body padding10 font14">
-                    <div *ngIf='slide.show.rating.average!=null; else searchRatingUnavailable'>
-                      <span class="pl-1">{{slide.show.rating.average}}</span><span>/10</span>
-                    </div>
-                    <ng-template #searchRatingUnavailable>
-                      <span class="pl-1">N/A</span>
-                    </ng-template>
-                    <div><span>{{slide.show.name}}</span></div>
-                  </div>
+                  <ng-template #searchRatingUnavailable>
+                    <span class="pl-1">N/A</span>
+                  </ng-template>
                 </div>
               </div>
-            </carousel>
-          </div>
-          <ng-template #noResultFound>
-            <div class="justify-content-center mt-3">
-              <b>No Results Found For: '{{searchChar}}'.</b>
             </div>
-          </ng-template>
+          </carousel>
         </div>
-      </div> 
+        <ng-template #noResultFound>
+          <div class="justify-content-center mt-3">
+            <b>No Results Found For: '{{searchChar}}'.</b>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+    <!--Search Results End-->
+
   </section>
 </div>
+<!--All Shows End-->

@@ -28,7 +28,7 @@ export class ShowDetailsComponent implements OnInit {
       this.showDetails = data;
       this.castDetails = this.showDetails._embedded.cast;
       this.removeSemanticTagsFromSummary();
-      this.loadSeasons();
+      this.loader = false;
     });
   }
 
@@ -39,13 +39,5 @@ export class ShowDetailsComponent implements OnInit {
     } else {
       this.showDetails.summary = 'Summary Is unavailable.';
     }
-  }
-
-  // loads seasons Information of shows based on show id
-  loadSeasons(): void {
-    this.showDetailsService.getSpecificSeasonsInfo(this.selectedShowId).subscribe(seasonsData => {
-      this.seasonsDetails = seasonsData;
-      this.loader = false;
-    });
   }
 }

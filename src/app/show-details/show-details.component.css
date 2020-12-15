@@ -2,19 +2,19 @@
     max-height: 100px;
     overflow: auto;
 }
-.carousel::ng-deep .carousel-cells .carousel-cell{
-    overflow: visible;
-    height: auto!important;
-}
-.carousel{
-    height: 300px!important;
-}
 .img-photos{
     height: 100%; 
     width:100%;
 }
+.no-preview{
+    border:1px solid rgba(0,0,0,.125);
+    position: relative;
+    align-items: center;
+    height: 234px;
+    justify-content: center;
+}
 .no-cast-image{
-    height: 140px;
+    height: 127px;
     text-align: center;
     margin-top: 50%;
 }
@@ -23,4 +23,7 @@
     width: 100%;
     max-height: 215px;
     min-height: 215px;
+}
+.show-info{
+    justify-content: center;
 }
