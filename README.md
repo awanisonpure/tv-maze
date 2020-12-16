@@ -6,6 +6,8 @@ Also, the user can search for TV shows to get the details.
 
 ## PreRequisites
 - Node.js
+- Typescript
+- NPM
 
 ## Technologies Used
 
