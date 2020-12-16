@@ -37,7 +37,7 @@
             </h4>
             <carousel [cellsToScroll]='2'>
               <div *ngFor="let result of genreInfo.genreData" [id]="result.id">
-                <div class="carousel-cell card dark-bg hand carousel-width">
+                <div class="width180 carousel-cell card dark-bg hand">
                   <div class="card-img-top">
                     <div *ngIf='result.image!=null; else imageUnavailable'>
                       <img class="" [src]="result.image.medium" [alt]="" [title]="result.name"
