@@ -2,20 +2,32 @@
 .margin-auto{
     margin: auto;
 }
+.marginT-80{
+    margin-top: 80px;
+}
 .paddingT25{
     padding-top: 25px;
 }
-.padding10{
-    padding: 10px;
+.paddingT{
+    padding-top: 20px;
+}
+.padding-card{
+    padding: 5px 10px;
 }
 .padding25{
     padding: 25px;
 }
 .paddingLR20{
-    padding: 0 20px;
+    padding: 0 40px;
 }
-.font14{
-    font-size: 14px;
+.border0{
+    border: 0;
+}
+.font12{
+    font-size: 12px;
+}
+.fontB{
+    font-weight: 600;
 }
 .text-white{
     color: white;
@@ -23,8 +35,15 @@
 .width100{
     width: 100%;
 }
-body{
-    background-color: #ddc37d;
+.card-bg{
+    background-color: #d5dff0fc;
+}
+.dark-bg{
+    background-color: #3c587d;
+    color: #fff;
+}
+.dark-text{
+    color: #3c587d;
 }
 .ellipsed {
     text-overflow: ellipsis;
@@ -33,5 +52,8 @@ body{
     display: block;
 }
 .spinner-border{
-    color: #dfa81a;
+    color: #3c587d;
+}
+.hand{
+    cursor: pointer;
 }

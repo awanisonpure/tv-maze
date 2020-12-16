@@ -35,6 +35,7 @@ describe('ShowsService', () => {
     });
     service.setSearchVal('Thrones');
   });
+
 });
 
 

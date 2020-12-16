@@ -19,7 +19,7 @@ export class ShowsComponent implements OnInit {
   searchChar: string;
   searchCharShows: any = [];
   isSearched = false;
-  size = 24;
+  size: number = 24;
 
   ngOnInit(): void {
     this.searchChar = '';
@@ -41,7 +41,7 @@ export class ShowsComponent implements OnInit {
       this.allGenreList = this.allGenreList.concat(element.genres);
     });
     // removing duplicate values from allGenreList
-    this.uniqueGenreList = ['Popular Shows'].concat(this.allGenreList.filter( function( item, index, inputArray ) {
+    this.uniqueGenreList = ['Popular Shows'].concat(this.allGenreList.filter(function (item, index, inputArray) {
       return inputArray.indexOf(item) === index;
     }));
     this.genreBasedShows();
@@ -69,13 +69,13 @@ export class ShowsComponent implements OnInit {
 
   // sort genre data based on average rating in descending order
   sortByRating(data: any[]): any {
-    data.sort((value1: { rating: { average: number; }; }, value2: { rating: { average: number; }; }) => 
-         (value1.rating.average > value2.rating.average) ? -1 : 1);
+    data.sort((value1: { rating: { average: number; }; }, value2: { rating: { average: number; }; }) =>
+      (value1.rating.average > value2.rating.average) ? -1 : 1);
     return data;
   }
-  
+
   // getting search value based on search key
-  getSearchVal(): any{
+  getSearchVal(): any {
     this.showsService.getSearchVal().subscribe(value => {
       this.searchChar = value;
       this.searchResults();
@@ -91,21 +91,21 @@ export class ShowsComponent implements OnInit {
     });
   }
 
-   // fetch searched value from input box
-   valueSearched(event: { target: { value: string; }; keyCode: number; }): void {
+  // fetch searched value from input box
+  valueSearched(event: { target: { value: string; }; keyCode: number; }): void {
     this.searchChar = event.target.value;
-    if (event.keyCode === 13) { 
-      this.search(); 
-    }   
+    if (event.keyCode === 13) {
+      this.search();
+    }
   }
 
-  // set the searched key value to be fetched in dashboard page
+  // set the searched key value to be fetched in home page
   search(): void {
     return this.showsService.setSearchVal(this.searchChar);
   }
 
   // clearing input field
-  clearSearch(){
+  clearSearch(): void {
     this.searchChar = '';
   }
 

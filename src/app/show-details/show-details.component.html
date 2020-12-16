@@ -8,96 +8,117 @@
 </div>
 <div *ngIf='!loader'>
   <!--Back Link Start-->
-<div>
-  <div class="dark-text font12">
-    <a routerLink="/shows"><span>&#8592;</span>Back</a>
+  <div class="pl-3">
+    <a class="dark-text font16 fontB" routerLink="/shows"><span>&#8592;</span>Back</a>
   </div>
-</div>
-<!--Back Link End-->
+  <!--Back Link End-->
   <!-- Show Information -->
-  <div class="">
-    <div class="paddingLR20">
-      <section class="mtop-80">
-        <div *ngIf='showDetails!=null; else noDetails'>
-          <div class="row show-info mt-5">
-            <div class="col-10 col-sm-3 col-lg-3 " *ngIf='showDetails.image!=null; else noDetailsImage'>
-              <div class="card h-100 border0">
-                <img class="width100" [src]="showDetails.image.medium" alt="No Preview Available"
-                  [title]="showDetails.name">
-              </div>
+  <div class="paddingLR20">
+    <section class="mtop-80">
+      <div *ngIf='showDetails!=null; else noDetails'>
+        <div class="row mt-5">
+          <div class="col-12 col-sm-3 col-lg-3" *ngIf='showDetails.image!=null; else noDetailsImage'>
+            <div class="card h-100 border0">
+              <img class="width100" [src]="showDetails.image.medium" alt="No Preview Available"
+                [title]="showDetails.name">
             </div>
-            <ng-template #noDetailsImage>
-              <div class="card col-sm-3 no-preview card-bg">Image Unavailable</div>
-            </ng-template>
-            <div class="col-12 col-sm-8 col-lg-6">
-              <div class="card h-100 border0">
-                <div class="card-body">
-                  <h4 class="card-title">{{showDetails.name}}</h4>
-                  <div class="font12 paddingT">
-                    <div *ngIf='showDetails.rating.average!=null'>
-                      <h6 class="card-subtitle mb-2"><label>Rating: {{showDetails.rating.average}}</label></h6>
-                    </div>
+          </div>
+          <ng-template #noDetailsImage>
+            <div class="card col-sm-3 no-preview dark-bg">Image Unavailable</div>
+          </ng-template>
+          <div class="col-12 col-sm-8 col-lg-6">
+            <div class="card h-100 border0">
+              <div class="card-body dark-text">
+                <h4 class="card-title">{{showDetails.name}}</h4>
+                <div class="font12 paddingT">
+                  <div *ngIf='showDetails.rating.average!=null; ratingNull'>
+                    <h6 class="card-subtitle mb-2"><label>Rating: {{showDetails.rating.average}}</label></h6>
+                  </div>
+                  <div *ngIf='showDetails.language!=null; langNull'>
                     <h6 class="card-subtitle mb-2"><label>Language: {{showDetails.language}}</label></h6>
+                  </div>
+                  <ng-template #langNull>
+                    <label>Language: </label><span class="pl-1">N/A</span>
+                  </ng-template>
+                  <div *ngIf='showDetails.network.name!=null; ratingNull'>
                     <h6 class="card-subtitle mb-2"><label>Network: {{showDetails.network.name}}</label></h6>
+                  </div>
+                  <ng-template #ratingNull>
+                    <label>Rating: </label><span class="pl-1">N/A</span>
+                  </ng-template>
+                  <div *ngIf='showDetails.network.country.name!=null; countryNull'>
                     <h6 class="card-subtitle mb-2"><label>Country: {{showDetails.network.country.name}}</label></h6>
+                  </div>
+                  <ng-template #countryNull>
+                    <label>Country: </label><span class="pl-1">N/A</span>
+                  </ng-template>
+                  <div *ngIf='showDetails.genres!=null; genreNull'>
                     <h6 class="card-subtitle mb-2"><label>Genre: {{showDetails.genres}}</label></h6>
+                  </div>
+                  <ng-template #genreNull>
+                    <label>Genre: </label><span class="pl-1">N/A</span>
+                  </ng-template>
+                  <div *ngIf='showDetails.officialSite!=null; siteNull'>
                     <h6 class="card-subtitle mb-2"><label>Official Site: <a target="_blank"
-                          href="{{showDetails.officialSite}}">{{showDetails.officialSite}}</a></label>
+                      href="{{showDetails.officialSite}}">{{showDetails.officialSite}}</a></label>
                     </h6>
                   </div>
+                  <ng-template #siteNull>
+                    <label>Official Site: </label><span class="pl-1">N/A</span>
+                  </ng-template>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-12 mt-3" *ngIf='showDetails.summary!=""; else noSummary'>
+            <div class="card dark-bg">
+              <div class="card-body">
+                <h5 class="card-title">Summary</h5>
+                <p class="card-text">{{showDetails.summary}}</p>
+              </div>
+            </div>
+          </div>
+          <ng-template #noSummary></ng-template>
+        </div>
+      </div>
+      <ng-template #noDetails>
+        <div class="text-center mt-3">
+          <b>No Data Found.</b>
+        </div>
+      </ng-template>
+    </section>
+
+    <!-- Seasons Display Section -->
+    <app-show-seasons></app-show-seasons>
+
+    <!-- Cast Display Section -->
+    <section class="mb-1 mt-4">
+      <div *ngIf='castDetails.length>0; else noCastFound'>
+        <h4 class="dark-text"><span class="popular">Cast & Crew</span></h4>
+        <div class="col-12">
           <div class="row">
-            <div class="col-12 col-sm-12 mt-5" *ngIf='showDetails.summary!=""; else noSummary'>
-              <div class="card card-bg">
-                <div class="card-body">
-                  <h5 class="card-title">Summary</h5>
-                  <p class="card-text">{{showDetails.summary}}</p>
-                </div>
-              </div>
-            </div>
-            <ng-template #noSummary></ng-template>
-          </div>
-        </div>
-        <ng-template #noDetails>
-          <div class="justify-content-center mt-3">
-            <b>No Data Found.</b>
-          </div>
-        </ng-template>
-      </section>
-
-      <!-- Seasons Display Section -->
-      <app-show-seasons></app-show-seasons>
-
-      <!-- Cast Display Section -->
-      <section class="mb-1">
-        <div *ngIf='castDetails.length>0; else noCastFound'>
-          <h4 class="custom-headers mtop-50"><span class="popular">Cast & Crew</span></h4>
-          <div class="col-12">
-            <div class="row">
-              <ng-container *ngFor="let castImages of castDetails">
-                <div class="col-6 col-sm-6 col-md-2">
-                  <div class="card mt-2 mb-2 card-bg" *ngIf='castImages.person.image!=null; else noCastImage'>
-                    <div>
-                      <img class="card-img-top img-photos" [src]="castImages.person.image.medium"
-                        alt="{{castImages.person.name}}" style="width:100%">
-                    </div>
-                    <div class="card-body padding-card">
-                      <p class="card-text">
-                        <span class="ellipsed" title="{{castImages.person.name}}">{{castImages.person.name}}</span>
-                      </p>
-                    </div>
+            <ng-container *ngFor="let castImages of castDetails">
+              <div class="col-6 col-sm-6 col-md-2">
+                <div class="card mt-2 mb-2 dark-bg" *ngIf='castImages.person.image!=null; else noCastImage'>
+                  <div>
+                    <img class="card-img-top img-photos" [src]="castImages.person.image.medium"
+                      alt="{{castImages.person.name}}" style="width:100%">
                   </div>
-                  <ng-template #noCastImage></ng-template>
+                  <div class="card-body padding-card">
+                    <p class="card-text">
+                      <span class="ellipsed" title="{{castImages.person.name}}">{{castImages.person.name}}</span>
+                    </p>
+                  </div>
                 </div>
-              </ng-container>
-            </div>
+                <ng-template #noCastImage></ng-template>
+              </div>
+            </ng-container>
           </div>
         </div>
-        <ng-template #noCastFound></ng-template>
-      </section>
-    </div>
+      </div>
+      <ng-template #noCastFound></ng-template>
+    </section>
   </div>
 </div>

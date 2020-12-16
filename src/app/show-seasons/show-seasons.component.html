@@ -1,19 +1,23 @@
-<section class="mb-2">
+<section class="mb-2 mt-4">
   <div *ngIf='seasonsDetails.length>1; else noSeasonsFound'>
-    <h4 class="custom-headers paddingT25">
-      <span class="popular">Seasons</span>
+    <h4 class="paddingT25">
+      <span class="dark-text">Seasons</span>
     </h4>
     <div class="col-12 ">
       <div class="row">
         <ng-container *ngFor="let seasonsData of seasonsDetails">
-          <div class="col-6 col-sm-6 col-md-2">
-            <div class="card mt-2 mb-2" *ngIf='seasonsData.image!=null; else noSeasonImage'>
+          <div class="col-6 col-sm-6 col-md-2" *ngIf='seasonsData.image!=null; else noSeasonImage'>
+            <div class="card mt-2 mb-2">
               <div class="card-img-top">
                 <img class="img-photos" [src]="seasonsData.image.medium" alt="No Preview Available">
               </div>
             </div>
-            <ng-template #noSeasonImage></ng-template>
           </div>
+          <ng-template #noSeasonImage>
+            <div class="col-6 col-sm-6 col-md-2 display-flex">
+              <div class="card mt-2 mb-2 no-season dark-bg">Image Unavailable</div>
+            </div>
+          </ng-template>
         </ng-container>
       </div>
     </div>

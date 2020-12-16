@@ -8,8 +8,9 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Tv-Maze';
   searchChar = '';
-  
-  clearSearch(){
+
+
+  clearSearch(): void {
     this.searchChar = '';
   }
 }

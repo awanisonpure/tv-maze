@@ -1,9 +1,6 @@
-.img-photos{
-    height: 100%; 
-    width:100%;
-}
-.no-cast-image{
-    height: 127px;
+.no-season{
+    border: 1px solid rgba(0,0,0,.125);
+    justify-content: center;
     text-align: center;
-    margin-top: 50%;
+    width: 100%;
 }

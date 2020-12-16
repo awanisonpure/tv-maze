@@ -1,29 +1,8 @@
-.card-overflow{
-    max-height: 100px;
-    overflow: auto;
-}
-.img-photos{
-    height: 100%; 
-    width:100%;
-}
+
 .no-preview{
     border:1px solid rgba(0,0,0,.125);
-    position: relative;
     align-items: center;
     height: 234px;
     justify-content: center;
-}
-.no-cast-image{
-    height: 127px;
-    text-align: center;
-    margin-top: 50%;
-}
-.summary-info{
-    height: 215px;
-    width: 100%;
-    max-height: 215px;
-    min-height: 215px;
-}
-.show-info{
-    justify-content: center;
+    margin-left: 16px;
 }

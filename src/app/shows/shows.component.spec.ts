@@ -1,5 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ComponentFixture, fakeAsync, TestBed} from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
 import { of } from 'rxjs';
 import { ShowsComponent } from './shows.component';
@@ -12,11 +12,11 @@ describe('ShowsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ShowsComponent ],
+      declarations: [ShowsComponent],
       imports: [HttpClientTestingModule, RouterModule.forRoot([])],
       providers: [ShowsService],
     })
-    .compileComponents();
+      .compileComponents();
     fixture = TestBed.createComponent(ShowsComponent);
     component = fixture.componentInstance;
     showsService = TestBed.inject(ShowsService);
