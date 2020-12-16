@@ -1,12 +1,12 @@
+.width180{
+    width: 180px!important;
+}
 .carousel::ng-deep .carousel-cells .carousel-cell{
     overflow: visible;
     height: auto!important;
 }
 .carousel{
     height: 360px!important;
-}
-.carousel-width{
-    width: 180px;
 }
 .no-genre-image{
     text-align: center;
