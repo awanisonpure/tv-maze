@@ -10,10 +10,6 @@ export class MyHttpInterceptor implements HttpInterceptor {
   constructor(private router: Router) { }
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
-      finalize(() => {
-          //
-      }
-      ),
       catchError((error: HttpErrorResponse) => {
         this.router.navigate(['page-not-found']);
         return throwError(error);
