@@ -26,6 +26,9 @@
 .font12{
     font-size: 12px;
 }
+.font16{
+    font-size: 16px;
+}
 .fontB{
     font-weight: 600;
 }
@@ -35,15 +38,18 @@
 .width100{
     width: 100%;
 }
-.card-bg{
-    background-color: #d5dff0fc;
+.display-flex{
+    display: flex;
 }
 .dark-bg{
-    background-color: #3c587d;
+    background-color:#623645;
     color: #fff;
 }
 .dark-text{
-    color: #3c587d;
+    color: #623645;
+}
+.card{
+    border-radius: 0;
 }
 .ellipsed {
     text-overflow: ellipsis;
@@ -52,8 +58,17 @@
     display: block;
 }
 .spinner-border{
-    color: #3c587d;
+    color: #623645;
 }
 .hand{
     cursor: pointer;
+}
+.img-photos{
+    height: 100%; 
+    width:100%;
+}
+.no-cast-image{
+    height: 127px;
+    text-align: center;
+    margin-top: 50%;
 }
