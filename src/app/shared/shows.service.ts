@@ -13,7 +13,7 @@ export class ShowsService {
   constructor(private httpClient: HttpClient) { }
 
   mainUrl = 'http://api.tvmaze.com/';
-  
+
   // get list of All Shows 
   getAllShowsList(): Observable<any> {
     return this.httpClient.get<any[]>(`${this.mainUrl}shows`);
